@@ -22,6 +22,8 @@ function buildWarnings(text) {
 }
 
 document.getElementById("summarize").onclick = async () => {
+    const btn = document.getElementById("summarize");
+    const loading = document.getElementById("loading");
 
     let [tab] = await chrome.tabs.query({active: true, currentWindow: true});
 
@@ -33,35 +35,57 @@ document.getElementById("summarize").onclick = async () => {
             return;
         }
 
-        let response = await fetch("http://localhost:8080/api/summarize", {
-            method: "POST",
-            headers: {
-                "Content-Type": "text/plain"
-            },
-            body: text
-        });
+        // Show loading, disable button
+        btn.disabled = true;
+        btn.style.opacity = "0.7";
+        btn.style.cursor = "not-allowed";
+        loading.style.display = "flex";
 
-        let summary = await response.text();
+        try {
+            let response = await fetch("http://localhost:8080/api/summarize", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "text/plain"
+                },
+                body: text
+            });
 
-        document.getElementById("summary").innerText = summary;
+            let rawSummary = await response.text();
 
-        let warnings = buildWarnings(text);
-        document.getElementById("warnings").innerText = warnings.length > 0
-            ? warnings.join(", ")
-            : "None";
+            let riskLevel = extractRiskLevel(rawSummary);
+            let summary = rawSummary.replace(/risk:?\s*(low|medium|high)/i, "").trim();
 
-        let riskLevel = extractRiskLevel(summary);
-        let riskEl = document.getElementById("risk");
-        riskEl.innerText = riskLevel ? riskLevel : "UNKNOWN";
+            // Add the flag emoji
+            summary = summary.replace(/Red flags:/gi, "🚩 Red flags:");
 
-        if (riskLevel === "HIGH") {
-            riskEl.style.color = "red";
-        } else if (riskLevel === "MEDIUM") {
-            riskEl.style.color = "orange";
-        } else if (riskLevel === "LOW") {
-            riskEl.style.color = "green";
-        } else {
-            riskEl.style.color = "black";
+            document.getElementById("summary").innerText = summary;
+
+            let warnings = buildWarnings(text);
+            document.getElementById("warnings").innerText = warnings.length > 0
+                ? warnings.join(", ")
+                : "None";
+
+            let riskEl = document.getElementById("risk");
+            riskEl.innerText = riskLevel ? riskLevel : "UNKNOWN";
+
+            if (riskLevel === "HIGH") {
+                riskEl.style.color = "red";
+            } else if (riskLevel === "MEDIUM") {
+                riskEl.style.color = "orange";
+            } else if (riskLevel === "LOW") {
+                riskEl.style.color = "green";
+            } else {
+                riskEl.style.color = "black";
+            }
+        } catch (error) {
+            console.error("Fetch failed:", error);
+            document.getElementById("summary").innerText = "Error: Could not reach the server.";
+        } finally {
+            // Hide loading, enable button
+            btn.disabled = false;
+            btn.style.opacity = "1";
+            btn.style.cursor = "pointer";
+            loading.style.display = "none";
         }
     });
 };
