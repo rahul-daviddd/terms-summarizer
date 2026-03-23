@@ -11,11 +11,12 @@ A Chrome extension + Spring Boot backend that extracts Terms & Conditions text f
 git clone https://github.com/rahul-daviddd/terms-summarizer.git
 cd terms-summarizer
 ```
-
+\
 2. Set your Gemini API key (PowerShell)
 API key must be loaded everytime you open a new terminal.
 ```powershell
 $env:GEMINI_API_KEY="your_gemini_key_here"
+```
 
 3. Run the backend
 ```powershell
@@ -24,15 +25,15 @@ mvn spring-boot:run
 ```
 
 4. Load the Chrome extension
-1. Open `chrome://extensions`
-2. Enable **Developer mode**
-3. Click **Load unpacked**
-4. Select the `extension` folder from this repo
+5. Open `chrome://extensions`
+6. Enable **Developer mode**
+7. Click **Load unpacked**
+8. Select the `extension` folder from this repo
 
-5. Use it
-1. Open any page with Terms/Privacy text
-2. Click the extension icon
-3. Press **Analyze**
+9. Use it
+10. Open any page with Terms/Privacy text
+11. Click the extension icon
+12. Press **Analyze**
 
 ## Troubleshooting
 
