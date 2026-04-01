@@ -29,20 +29,20 @@ ii. Click the "Environment Variables..." button at the bottom.<br>
 iii. Under "User variables", click "New..."<br>
 iv. Enter the Variable name exactly as `GEMINI_API_KEY` and add your API key as the value.<br>
 v. Save everything, then completely restart your IDE/terminals so the new variable takes effect.
-
+\
 3. **Run the backend**
 ```powershell
 cd backend
 mvn spring-boot:run
 ```
-
-4. **Load the Chrome extension**
+\
+4. **Load the Chrome extension**<br>
    i. Open `chrome://extensions`<br>
    ii. Enable **Developer mode**<br>
    iii. Click **Load unpacked**<br>
    iv. Select the `extension` folder from this repo
-
-5. **Use it**
+\
+5. **Use it**<br>
    i. Open any page with Terms/Privacy text<br>
    ii. Click the extension icon<br>
    iii. Press **Analyze**
