@@ -2,17 +2,17 @@
 
 A Chrome extension + Spring Boot backend that extracts Terms & Conditions text from the current page and summarizes it using the Gemini API.
 
-## NOTE: Apache Maven is required to run this project. Download it from https://maven.apache.org/download.cgi and extract the contents to a folder. Add the bin folder to your system PATH. Restart your IDE.
+### NOTE: Apache Maven is required to run this project. Download it from https://maven.apache.org/download.cgi and extract the contents to a folder. Add the bin folder to your system PATH. Restart your IDE.
 
 ## Step-by-step setup
 
-1. Clone the repo
+1. **Clone the repo**
 ```bash
 git clone https://github.com/rahul-daviddd/terms-summarizer.git
 cd terms-summarizer
 ```
 \
-2. Set your Gemini API key
+2. **Set your Gemini API key**
 
 Choose one of the following methods depending on your setup:
 
@@ -30,7 +30,7 @@ Add the API key to your system as a User environment variable so you don't have 
 4. Enter the Variable name exactly as `GEMINI_API_KEY` and add your API key as the value.
 5. Save everything, then completely restart your IDE/terminals so the new variable takes effect.
 
-3. Run the backend
+3. **Run the backend**
 ```powershell
 cd backend
 mvn spring-boot:run
