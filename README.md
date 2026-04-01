@@ -12,11 +12,23 @@ git clone https://github.com/rahul-daviddd/terms-summarizer.git
 cd terms-summarizer
 ```
 \
-2. Set your Gemini API key (PowerShell)
-API key must be loaded everytime you open a new terminal.
+2. Set your Gemini API key
+
+Choose one of the following methods depending on your setup:
+
+**Option A: Temporary (For a single session)**
+If you are testing or on a shared PC, load the key directly into your PowerShell session. *You must re-run this command every time you open a new terminal.*
 ```powershell
 $env:GEMINI_API_KEY="your_gemini_key_here"
 ```
+
+**Option B: Permanent (For trusted PCs, Windows only)**
+Add the API key to your system as a User environment variable so you don't have to load it every time:
+1. Press the Windows key, type "Environment Variables", and click "Edit the system environment variables".
+2. Click the "Environment Variables..." button at the bottom.
+3. Under "User variables", click "New..."
+4. Enter the Variable name exactly as `GEMINI_API_KEY` and add your API key as the value.
+5. Save everything, then completely restart your IDE/terminals so the new variable takes effect.
 
 3. Run the backend
 ```powershell
@@ -38,6 +50,6 @@ mvn spring-boot:run
 ## Troubleshooting
 
 - **500 error**: Check the backend terminal for the exact error message.
-- **Missing key**: Make sure `GEMINI_API_KEY` is set in the same terminal where you run Maven.
+- **Missing key**: Make sure the `GEMINI_API_KEY` is loaded in your current terminal session (Option A) or added to your Windows settings and your IDE has been restarted (Option B).
 - **Timeouts**: Try analyzing a shorter page or refresh and retry.
 
