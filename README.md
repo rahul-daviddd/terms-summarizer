@@ -36,16 +36,16 @@ cd backend
 mvn spring-boot:run
 ```
 
-4. Load the Chrome extension
-5. Open `chrome://extensions`
-6. Enable **Developer mode**
-7. Click **Load unpacked**
-8. Select the `extension` folder from this repo
+4. **Load the Chrome extension**
+   1. Open `chrome://extensions`
+   2. Enable **Developer mode**
+   3. Click **Load unpacked**
+   4. Select the `extension` folder from this repo
 
-9. Use it
-10. Open any page with Terms/Privacy text
-11. Click the extension icon
-12. Press **Analyze**
+5. **Use it**
+   1. Open any page with Terms/Privacy text
+   2. Click the extension icon
+   3. Press **Analyze**
 
 ## Troubleshooting
 
