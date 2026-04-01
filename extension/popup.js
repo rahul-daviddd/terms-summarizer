@@ -21,6 +21,35 @@ function buildWarnings(text) {
     return warnings;
 }
 
+function displayResults(summary, warningsText, riskLevel) {
+    document.getElementById("summary").innerText = summary;
+    document.getElementById("warnings").innerText = warningsText;
+
+    let riskEl = document.getElementById("risk");
+    riskEl.innerText = riskLevel ? riskLevel : "UNKNOWN";
+
+    if (riskLevel === "HIGH") {
+        riskEl.style.color = "red";
+    } else if (riskLevel === "MEDIUM") {
+        riskEl.style.color = "orange";
+    } else if (riskLevel === "LOW") {
+        riskEl.style.color = "green";
+    } else {
+        riskEl.style.color = "black";
+    }
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+    let [tab] = await chrome.tabs.query({active: true, currentWindow: true});
+    if (!tab) return;
+    chrome.tabs.sendMessage(tab.id, {type: "GET_ANALYSIS"}, (response) => {
+        if (chrome.runtime.lastError) return;
+        if (response && response.summary) {
+            displayResults(response.summary, response.warningsText, response.riskLevel);
+        }
+    });
+});
+
 document.getElementById("summarize").onclick = async () => {
     const btn = document.getElementById("summarize");
     const loading = document.getElementById("loading");
@@ -58,25 +87,15 @@ document.getElementById("summarize").onclick = async () => {
             // Add the flag emoji
             summary = summary.replace(/Red flags:/gi, "🚩 Red flags:");
 
-            document.getElementById("summary").innerText = summary;
-
             let warnings = buildWarnings(text);
-            document.getElementById("warnings").innerText = warnings.length > 0
-                ? warnings.join(", ")
-                : "None";
+            let warningsText = warnings.length > 0 ? warnings.join(", ") : "None";
 
-            let riskEl = document.getElementById("risk");
-            riskEl.innerText = riskLevel ? riskLevel : "UNKNOWN";
+            displayResults(summary, warningsText, riskLevel);
 
-            if (riskLevel === "HIGH") {
-                riskEl.style.color = "red";
-            } else if (riskLevel === "MEDIUM") {
-                riskEl.style.color = "orange";
-            } else if (riskLevel === "LOW") {
-                riskEl.style.color = "green";
-            } else {
-                riskEl.style.color = "black";
-            }
+            chrome.tabs.sendMessage(tab.id, {
+                type: "SAVE_ANALYSIS",
+                data: { summary, warningsText, riskLevel }
+            });
         } catch (error) {
             console.error("Fetch failed:", error);
             document.getElementById("summary").innerText = "Error: Could not reach the server.";

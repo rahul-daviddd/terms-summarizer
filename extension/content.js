@@ -1,3 +1,5 @@
+let cachedAnalysis = null;
+
 function extractTerms() {
     let candidates = [];
 
@@ -21,5 +23,10 @@ function extractTerms() {
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.type === "GET_TERMS") {
         sendResponse(extractTerms());
+    } else if (request.type === "SAVE_ANALYSIS") {
+        cachedAnalysis = request.data;
+        sendResponse({success: true});
+    } else if (request.type === "GET_ANALYSIS") {
+        sendResponse(cachedAnalysis);
     }
 });
