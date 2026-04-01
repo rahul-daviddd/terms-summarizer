@@ -23,7 +23,7 @@ $env:GEMINI_API_KEY="your_gemini_key_here"
 ```
 
 **Option B: Permanent (For trusted PCs, Windows only)**
-Add the API key to your system as a User environment variable so you don't have to load it every time:
+Add the API key to your system as a User environment variable so you don't have to load it every time:<br>
 i. Press the Windows key, type "Environment Variables", and click "Edit the system environment variables".<br>
 ii. Click the "Environment Variables..." button at the bottom.<br>
 iii. Under "User variables", click "New..."<br>
