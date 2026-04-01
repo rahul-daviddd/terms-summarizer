@@ -11,7 +11,7 @@ A Chrome extension + Spring Boot backend that extracts Terms & Conditions text f
 git clone https://github.com/rahul-daviddd/terms-summarizer.git
 cd terms-summarizer
 ```
-\
+
 2. **Set your Gemini API key**
 
 Choose one of the following methods depending on your setup:
@@ -23,29 +23,30 @@ $env:GEMINI_API_KEY="your_gemini_key_here"
 ```
 
 **Option B: Permanent (For trusted PCs, Windows only)**
-Add the API key to your system as a User environment variable so you don't have to load it every time:<br><br>
-i. Press the Windows key, type "Environment Variables", and click "Edit the system environment variables".<br>
-ii. Click the "Environment Variables..." button at the bottom.<br>
-iii. Under "User variables", click "New..."<br>
-iv. Enter the Variable name exactly as `GEMINI_API_KEY` and add your API key as the value.<br>
-v. Save everything, then completely restart your IDE/terminals so the new variable takes effect.
-\
+Add the API key to your system as a User environment variable so you don't have to load it every time:
+
+   1. Press the Windows key, type "Environment Variables", and click "Edit the system environment variables".
+   2. Click the "Environment Variables..." button at the bottom.
+   3. Under "User variables", click "New..."
+   4. Enter the Variable name exactly as `GEMINI_API_KEY` and add your API key as the value.
+   5. Save everything, then completely restart your IDE/terminals so the new variable takes effect.
+
 3. **Run the backend**
 ```powershell
 cd backend
 mvn spring-boot:run
 ```
-\
-4. **Load the Chrome extension**<br>
-   i. Open `chrome://extensions`<br>
-   ii. Enable **Developer mode**<br>
-   iii. Click **Load unpacked**<br>
-   iv. Select the `extension` folder from this repo
-\
-5. **Use it**<br>
-   i. Open any page with Terms/Privacy text<br>
-   ii. Click the extension icon<br>
-   iii. Press **Analyze**
+
+4. **Load the Chrome extension**
+   1. Open `chrome://extensions`
+   2. Enable **Developer mode**
+   3. Click **Load unpacked**
+   4. Select the `extension` folder from this repo
+
+5. **Use it**
+   1. Open any page with Terms/Privacy text
+   2. Click the extension icon
+   3. Press **Analyze**
 
 ## Troubleshooting
 
