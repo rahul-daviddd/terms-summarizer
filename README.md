@@ -24,11 +24,11 @@ $env:GEMINI_API_KEY="your_gemini_key_here"
 
 **Option B: Permanent (For trusted PCs, Windows only)**
 Add the API key to your system as a User environment variable so you don't have to load it every time:
-1. Press the Windows key, type "Environment Variables", and click "Edit the system environment variables".
-2. Click the "Environment Variables..." button at the bottom.
-3. Under "User variables", click "New..."
-4. Enter the Variable name exactly as `GEMINI_API_KEY` and add your API key as the value.
-5. Save everything, then completely restart your IDE/terminals so the new variable takes effect.
+i. Press the Windows key, type "Environment Variables", and click "Edit the system environment variables".
+ii. Click the "Environment Variables..." button at the bottom.
+iii. Under "User variables", click "New..."
+iv. Enter the Variable name exactly as `GEMINI_API_KEY` and add your API key as the value.
+v. Save everything, then completely restart your IDE/terminals so the new variable takes effect.
 
 3. **Run the backend**
 ```powershell
@@ -37,15 +37,15 @@ mvn spring-boot:run
 ```
 
 4. **Load the Chrome extension**
-   1. Open `chrome://extensions`
-   2. Enable **Developer mode**
-   3. Click **Load unpacked**
-   4. Select the `extension` folder from this repo
+   i. Open `chrome://extensions`
+   ii. Enable **Developer mode**
+   iii. Click **Load unpacked**
+   iv. Select the `extension` folder from this repo
 
 5. **Use it**
-   1. Open any page with Terms/Privacy text
-   2. Click the extension icon
-   3. Press **Analyze**
+   i. Open any page with Terms/Privacy text
+   ii. Click the extension icon
+   iii. Press **Analyze**
 
 ## Troubleshooting
 
